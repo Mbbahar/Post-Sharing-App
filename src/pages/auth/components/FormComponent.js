@@ -11,7 +11,7 @@ function FormComponent({
   onNavigateText,
   onNavigatePress,
 }) {
-  const [isShowing, setShowing] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
   return (
     <View>
       <Image
@@ -33,7 +33,7 @@ function FormComponent({
           onChangeText={(password) => setPassword(password)}
           style={{flex: 1}}></TextInput>
         <Icon
-          onPress={() => (isShowing ? setShowing(false) : setShowing(true))}
+          onPress={() => (isShowing ? setIsShowing(false) : setIsShowing(true))}
           style={form_component.text_input_icon}
           size={20}
           name={isShowing ? 'eye-off' : 'eye'}></Icon>

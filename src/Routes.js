@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-//import auth from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 
 import {SignIn, SignUp} from './pages/auth';
 import {Feed, Saved} from './pages/sharing';
@@ -12,7 +12,7 @@ import {Feed, Saved} from './pages/sharing';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// const hasSession = auth().currentUser;
+const hasSession = auth().currentUser;
 
 function SharingStack() {
   return (
@@ -34,7 +34,9 @@ function SharingStack() {
 function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{header: () => null}}>
+      <Stack.Navigator screenOptions={{header: () => null}}
+      initialRouteName={hasSession ? 'SharingStack' : 'SignIn'}
+      >
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SharingStack" component={SharingStack} />

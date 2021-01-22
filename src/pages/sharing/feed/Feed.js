@@ -1,61 +1,51 @@
+import React, {useState, useEffect} from 'react';
+import {Button, FlatList, SafeAreaView} from 'react-native';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+import {PostInput, PostItem} from './components';
+import {useTimeFormat} from '../../../hooks';
 
-import React, {useState, useEffect} from 'react';
-
-import {Button, FlatList, SafeAreaView} from 'react-native';
-
-import TodoInput from './components/TodoInput';
-import TodoItem from './components/TodoItem';
-
-
-export function Feed() {
-  const [todoArray, setTodoArray] = useState([]);
-  const [UserName,setUserName]=useState('');
-  const [UserEmail,setUserEmail]=useState('');
- /* useEffect(()=>{
-    const name=`${auth().currentUser.email}`.split('@')
-    //setUserName(name[0])
-    console.log(name[0]);
-  },[])*/
+export function Feed({navigation}) {
+  const [postArray, setPostArray] = useState([]);
+  const {timeFormatting} = useTimeFormat();
 
   useEffect(() => {
     database()
-      .ref(`${auth().currentUser.uid}`)
+      .ref('/posts/')
       .on('value', (snapshot) => {
         const data = snapshot.val();
-
         if (!data) {
           return;
         }
-        setTodoArray(Object.values(data));
+        setPostArray(Object.values(data));
       });
   }, []);
 
-  const renderTodo = ({item}) => <TodoItem item={item} />;
+  const renderPost = ({item}) => <PostItem item={item} />;
 
-  function addTodo(todo) {
-    const name=`${auth().currentUser.email}`.split('@')
-    const now = new Date();
-    const offsetMs = now.getTimezoneOffset() * 60 * 1000;
-    const dateLocal = new Date(now.getTime() - offsetMs);
-    const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "").replace("T", "").replace(/:/g,"");
+  function addPost(post) {
+    const name = `${auth().currentUser.email}`.split('@');
+    const time_str = timeFormatting();
     database()
-      .ref(`${auth().currentUser.uid}`)
-      .push({id: name[0],createdTime:str, text: todo});
+      .ref('/posts/')
+      .push({id: name[0], createdTime: time_str, text: post});
+  }
+
+  function _signOut() {
+    auth().signOut();
+    navigation.navigate('SignIn');
   }
 
   return (
-    // eslint-disable-next-line react-native/no-inline-styles
     <SafeAreaView style={{flex: 1}}>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
-        data={todoArray}
-        renderItem={renderTodo}
+        data={postArray}
+        renderItem={renderPost}
       />
 
-      <TodoInput onAdd={addTodo} />
-      <Button title="Çıkış Yap" onPress={() => auth().signOut()} />
+      <PostInput onAdd={addPost} />
+      <Button title="Sign Out" onPress={_signOut} />
     </SafeAreaView>
   );
 }

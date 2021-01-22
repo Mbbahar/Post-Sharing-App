@@ -4,14 +4,15 @@ import {FormComponent} from './components/FormComponent';
 import {form_component} from './styles/form_style';
 import {useSign} from './hooks';
 import {Loading} from '../../components';
+import auth from '@react-native-firebase/auth';
 
 function SignIn(props) {
-  const [UserEmail, setUserEmail] = useState('');
-  const [UserPassword, setUserPassword] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
   const {loading, error, response, signUp, login} = useSign();
 
   function _login() {
-    login(UserEmail, UserPassword);
+    login(userEmail, userPassword);
   }
 
   useEffect(() => {

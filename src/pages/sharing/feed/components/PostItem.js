@@ -1,10 +1,8 @@
 import React from 'react';
-
+import {View,Text, StyleSheet} from 'react-native';
 import moment from 'moment';
 
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-
-export default function TodoItem({item}) {
+export function PostItem({item}) {
   return (
     <View style={styles.container}>
       <View style={{borderBottomWidth:1,borderColor:'orange'}}>

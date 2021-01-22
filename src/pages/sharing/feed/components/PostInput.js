@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, StyleSheet} from 'react-native';
 
-export default function TodoInput({onAdd}) {
+export function PostInput({onAdd}) {
   const [text, setText] = useState('');
-
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Ekle bir şeyler.."
+        placeholder="Write something.."
         style={styles.input}
         onChangeText={(value) => setText(value)}
       />
-      <Button title="Ekle" onPress={() => onAdd(text)} />
+      <Button title="Share" onPress={() => onAdd(text)} />
     </View>
   );
 }
