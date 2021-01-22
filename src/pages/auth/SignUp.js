@@ -1,15 +1,22 @@
 import React, {useState, useEffect} from 'react';
+
 import {ScrollView, KeyboardAvoidingView, View, Alert} from 'react-native';
+
+import {Loading} from '../../components';
+
+import {useSign} from './hooks';
+
 import {FormComponent} from './components/FormComponent';
 import {form_component} from './styles/form_style';
-import {useSign} from './hooks';
-import {Loading} from '../../components';
 
 function SignUp(props) {
   const [UserEmail, setUserEmail] = useState('');
   const [UserPassword, setUserPassword] = useState('');
+  
   const {loading, error, response, signUp, login} = useSign();
-
+  
+ 
+  
   function _signUp() {
     signUp(UserEmail, UserPassword);
   }
@@ -18,7 +25,7 @@ function SignUp(props) {
       props.navigation.navigate('SignIn');
     }
   }, [response, loading]);
-
+  
   if (loading) {
     return <Loading />;
   }
