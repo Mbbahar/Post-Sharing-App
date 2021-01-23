@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {Button, FlatList, SafeAreaView} from 'react-native';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
-import {PostInput, PostItem} from './components';
+
+import React, {useState, useEffect} from 'react';
+
+import {Button, FlatList, SafeAreaView} from 'react-native';
+
 import {useTimeFormat} from '../../../hooks';
+
+import {PostInput, PostItem} from './components';
 
 export function Feed({navigation}) {
   const [postArray, setPostArray] = useState([]);
   const {timeFormatting} = useTimeFormat();
-
+  const [placeholderText,setPlaceHolderText]=useState('Write Something');
   useEffect(() => {
     database()
       .ref('/posts/')
@@ -21,9 +25,17 @@ export function Feed({navigation}) {
       });
   }, []);
 
-  const renderPost = ({item}) => <PostItem item={item} />;
+  const renderPost = ({item}) => <PostItem item={item} onSaved={()=>{
+    database()
+    .ref(`${auth().currentUser.uid}`)
+    .push({item});
+
+  }}
+   />;
+
 
   function addPost(post) {
+    setPlaceHolderText(' ');
     const name = `${auth().currentUser.email}`.split('@');
     const time_str = timeFormatting();
     database()
@@ -31,10 +43,7 @@ export function Feed({navigation}) {
       .push({id: name[0], createdTime: time_str, text: post});
   }
 
-  function _signOut() {
-    auth().signOut();
-    navigation.navigate('SignIn');
-  }
+  
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -43,9 +52,7 @@ export function Feed({navigation}) {
         data={postArray}
         renderItem={renderPost}
       />
-
-      <PostInput onAdd={addPost} />
-      <Button title="Sign Out" onPress={_signOut} />
+      <PostInput onAdd={addPost} placeholdertext={placeholderText} />
     </SafeAreaView>
   );
 }

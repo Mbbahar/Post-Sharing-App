@@ -4,17 +4,14 @@ import {View,Text, StyleSheet} from 'react-native';
 
 import moment from 'moment';
 
-import  Icon  from 'react-native-vector-icons/Ionicons';
-
-export function PostItem({item,onSaved}) {
+export function PostItem({item}) {
   return (
     <View style={styles.container}>
       <View style={styles.contHeader}>
-      <Text>{item.id}</Text>
-      <Text style={styles.contDate}>{moment(item.createdTime,"YYYYMMDD,h:mm:ss").fromNow()}</Text>
+      <Text>{item.item.id}</Text>
+      <Text style={styles.contDate}>{moment(item.item.createdTime,"YYYYMMDD,h:mm:ss").fromNow()}</Text>
         </View>
-      <Text>{item.text}</Text>
-      <Icon name='save-outline' onPress={onSaved} size={25}/>
+      <Text>{item.item.text}</Text>
     </View>
   );
 }
