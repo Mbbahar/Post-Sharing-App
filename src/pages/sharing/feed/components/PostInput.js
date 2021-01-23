@@ -2,16 +2,22 @@ import React, {useState} from 'react';
 
 import {View, TextInput, Button, StyleSheet} from 'react-native';
 
-export function PostInput({onAdd,placeholdertext}) {
+export function PostInput({onAdd}) {
   const [text, setText] = useState('');
+
+  const sharePost = () => {
+    onAdd(text);
+    setText('');
+  };
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder={placeholdertext}
+        placeholder="Write something.."
         style={styles.input}
         onChangeText={(value) => setText(value)}
+        value={text}
       />
-      <Button title="Share" onPress={() => onAdd(text)} />
+      <Button title="Share" onPress={sharePost} />
     </View>
   );
 }

@@ -1,20 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 import 'moment/locale/tr';
 
-export function PostItem({item, onSaved}) {
+export function SavedItem({item}) {
   return (
     <View style={styles.container}>
       <View style={styles.contHeader}>
-        <Text>{item.id}</Text>
+        <Text>{item.item.id}</Text>
         <Text style={styles.contDate}>
-          {moment(item.createdTime, 'YYYYMMDD,h:mm:ss').locale('tr').fromNow()}
+          {moment(item.item.createdTime, 'YYYYMMDD,h:mm:ss')
+            .locale('tr')
+            .fromNow()}
         </Text>
       </View>
-      <Text>{item.text}</Text>
-      <Icon name="save-outline" onPress={onSaved} size={25} />
+      <Text>{item.item.text}</Text>
     </View>
   );
 }

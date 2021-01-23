@@ -24,7 +24,9 @@ function SharingStack() {
       tabBarOptions={{
         activeTintColor: '#ea8331',
         inactiveTintColor: 'gray',
-      }}>
+      }}
+      initialRouteName={'Feed'}
+      >
       <Tab.Screen name="Feed" component={Feed} />
       <Tab.Screen name="Saved" component={Saved} />
     </Tab.Navigator>
