@@ -1,5 +1,7 @@
 import React from 'react';
+
 import {View, Text, StyleSheet} from 'react-native';
+
 import moment from 'moment';
 import 'moment/locale/tr';
 
@@ -7,7 +9,7 @@ export function SavedItem({item}) {
   return (
     <View style={styles.container}>
       <View style={styles.contHeader}>
-        <Text>{item.item.id}</Text>
+        <Text style={{fontWeight:'bold'}}>{item.item.id}</Text>
         <Text style={styles.contDate}>
           {moment(item.item.createdTime, 'YYYYMMDD,h:mm:ss')
             .locale('tr')

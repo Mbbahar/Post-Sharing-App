@@ -1,8 +1,12 @@
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+
 import React, {useState, useEffect} from 'react';
+
 import {Button, FlatList, SafeAreaView} from 'react-native';
+
 import {useTimeFormat} from '../../../hooks';
+
 import {PostInput, PostItem} from './components';
 
 export function Feed({navigation}) {
@@ -48,12 +52,12 @@ export function Feed({navigation}) {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <PostInput onAdd={addPost} />
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={postArray}
         renderItem={renderPost}
       />
-      <PostInput onAdd={addPost} />
     </SafeAreaView>
   );
 }
