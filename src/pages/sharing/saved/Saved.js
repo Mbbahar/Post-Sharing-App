@@ -42,8 +42,8 @@ export function Saved({navigation}) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',margin:10}}>
-      <Text style={{fontWeight:'bold',fontSize:25}}>Saved</Text>
-      <Icon name="exit-outline" size={30}  onPress={_signOut} />
+      <Text style={{fontWeight:'bold',fontSize:30, color:'#ea8331'}}>Saved</Text>
+      <Icon name="exit-outline" size={30}  onPress={_signOut} style={{color:'#ea8331'}} />
       </View>
       <FlatList
         keyExtractor={(item, index) => index.toString()}

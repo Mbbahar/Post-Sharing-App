@@ -19,13 +19,13 @@ function SharingStack() {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color}) => setIcon(focused, color, route),
-        tabBarLabel: ({color}) => setLabel(color, route),
+        tabBarLabel: () => null,
       })}
       tabBarOptions={{
         activeTintColor: '#ea8331',
         inactiveTintColor: 'gray',
       }}
-      initialRouteName={'Feed'}
+      initialRouteName='Feed'
       >
       <Tab.Screen name="Feed" component={Feed} />
       <Tab.Screen name="Saved" component={Saved} />
@@ -63,22 +63,5 @@ function setIcon(focused, color, route) {
     default:
       break;
   }
-  return <Icon name={iconName} color={color} size={30} />;
-}
-
-function setLabel(color, route) {
-  let label;
-
-  switch (route.name) {
-    case 'Feed':
-      label = 'Feed';
-      break;
-    case 'Saved':
-      label = 'Saved';
-      break;
-
-    default:
-      break;
-  }
-  return <Text style={{color: color, fontSize: 17, marginBottom:5}}>{label}</Text>;
+  return <Icon name={iconName} color={color} size={40} />;
 }

@@ -30,7 +30,7 @@ function SignIn(props) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={form_component.keyboard_view}>
       <KeyboardAvoidingView
         style={form_component.keyboard_view}
         keyboardVerticalOffset={10}

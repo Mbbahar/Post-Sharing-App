@@ -5,6 +5,7 @@ const device_size = Dimensions.get('window');
 const form_component = StyleSheet.create({
   keyboard_view: {
     flex: 1,
+    backgroundColor:'#eceff1'
   },
   container: {
     flex: 1,
@@ -51,11 +52,10 @@ const form_component = StyleSheet.create({
     color: '#ea8331',
   },
   logo: {
-    height: 150,
-    width: 150,
+    height: 250,
+    width: 250,
     alignSelf: 'center',
-    borderRadius: 100,
-    marginVertical: 30,
+    //marginBottom: 30,
   },
 });
 export {form_component};
