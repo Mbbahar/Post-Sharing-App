@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import {View, Image, TextInput, TouchableOpacity, Text} from 'react-native';
+import {View, TextInput, TouchableOpacity, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {form_component} from '../styles/form_style';
-
 import LottieView from 'lottie-react-native';
 
 function FormComponent({
@@ -15,15 +14,11 @@ function FormComponent({
 }) {
   const [isShowing, setIsShowing] = useState(false);
   return (
-    <View >
-      {/* <Image
-        source={require('../../../assets/logo.png')}
-        style={form_component.logo}
-      /> */}
+    <View>
       <LottieView
         style={form_component.logo}
         autoPlay
-        source={require('../../../assets/welcome.json')}
+        source={require('../../../assets/animations/welcome.json')}
       />
       <TextInput
         style={form_component.TextInputStyle}
@@ -46,7 +41,7 @@ function FormComponent({
           name={isShowing ? 'eye-off' : 'eye'}></Icon>
       </View>
 
-      <TouchableOpacity style={form_component.button} onPress= {onPress}>
+      <TouchableOpacity style={form_component.button} onPress={onPress}>
         <Text style={form_component.buttonText}>{button_text}</Text>
       </TouchableOpacity>
       <TouchableOpacity

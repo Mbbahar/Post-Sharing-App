@@ -8,7 +8,6 @@ import {form_component} from './styles/form_style';
 function SignUp(props) {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-
   const {loading, error, response, signUp, login} = useSign();
 
   function _signUp() {

@@ -1,11 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
-
 import {SignIn, SignUp} from './pages/auth';
 import {Feed, Saved} from './pages/sharing';
 
@@ -25,8 +23,7 @@ function SharingStack() {
         activeTintColor: '#ea8331',
         inactiveTintColor: 'gray',
       }}
-      initialRouteName='Feed'
-      >
+      initialRouteName="Feed">
       <Tab.Screen name="Feed" component={Feed} />
       <Tab.Screen name="Saved" component={Saved} />
     </Tab.Navigator>
@@ -36,9 +33,9 @@ function SharingStack() {
 function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{header: () => null}}
-      initialRouteName={hasSession ? 'SharingStack' : 'SignIn'}
-      >
+      <Stack.Navigator
+        screenOptions={{header: () => null}}
+        initialRouteName={hasSession ? 'SharingStack' : 'SignIn'}>
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SharingStack" component={SharingStack} />

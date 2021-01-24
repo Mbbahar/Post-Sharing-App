@@ -1,14 +1,14 @@
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import React, {useState, useEffect} from 'react';
-import {Button, FlatList, SafeAreaView} from 'react-native';
+import {Alert, FlatList, SafeAreaView} from 'react-native';
 import {useTimeFormat} from '../../../hooks';
-import {PostInput, PostItem} from './components';
+import {PostInput, PostItem, EmptyList} from './components';
 
-export function Feed({navigation}) {
+export function Feed() {
   const [postArray, setPostArray] = useState([]);
   const {timeFormatting} = useTimeFormat();
-  const [sortedArray, setsortedArray] = useState([]);
+
   useEffect(() => {
     database()
       .ref('/posts/')
@@ -39,6 +39,10 @@ export function Feed({navigation}) {
   );
 
   function addPost(post) {
+    if (!post) {
+      Alert.alert('Uyarı', 'Boş post gönderilemez!');
+      return;
+    }
     const name = `${auth().currentUser.email}`.split('@');
     const time_str = timeFormatting();
     database()
@@ -53,6 +57,7 @@ export function Feed({navigation}) {
         keyExtractor={(item, index) => index.toString()}
         data={postArray}
         renderItem={renderPost}
+        ListEmptyComponent={EmptyList}
       />
     </SafeAreaView>
   );

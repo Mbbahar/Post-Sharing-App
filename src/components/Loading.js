@@ -13,9 +13,11 @@ export function Loading() {
       <LottieView
         style={{flex: 1}}
         autoPlay
-        source={require('../assets/loading.json')}
+        source={require('../assets/animations/loading.json')}
       />
-      <Text style={{color: '#ea8331', fontWeight: 'bold', fontSize:20}}>Loading...</Text>
+      <Text style={{color: '#ea8331', fontWeight: 'bold', fontSize: 20}}>
+        Loading...
+      </Text>
     </SafeAreaView>
   );
 }
